@@ -1,0 +1,6 @@
+rule,flagged,frauds_caught,total_cost,saving_vs_no_model,saving_pct
+no model (flag nothing),0,0,7727.67,0.0,0.0
+flag everything,56746,74,283730.0,-276002.33,-3571.6
+top 0.5% by score (review budget),284,65,3135.59,4592.08,59.4
+cost-optimal threshold (tuned on validation),122,60,2989.42,4738.25,61.3
+expected-loss rule: p x amount > review cost,83,24,2856.7,4870.97,63.0

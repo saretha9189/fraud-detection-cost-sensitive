@@ -1,0 +1,170 @@
+{
+  "data": {
+    "rows_in": 284807,
+    "duplicates_dropped": 1081,
+    "rows": 283726,
+    "fraud": 473,
+    "train_rows": 170235,
+    "val_rows": 56745,
+    "test_rows": 56746,
+    "train_fraud": 342,
+    "val_fraud": 57,
+    "test_fraud": 74,
+    "source": "creditcard.csv"
+  },
+  "assumptions": {
+    "review_cost": 5.0,
+    "review_budget": 0.005
+  },
+  "validation": [
+    {
+      "model": "gradient_boosting(depth=5,iter=400)",
+      "val_average_precision": 0.7735,
+      "val_recall_at_budget": 0.8246
+    },
+    {
+      "model": "logistic_regression",
+      "val_average_precision": 0.7519,
+      "val_recall_at_budget": 0.807
+    },
+    {
+      "model": "gradient_boosting(depth=5,iter=150)",
+      "val_average_precision": 0.7488,
+      "val_recall_at_budget": 0.8421
+    },
+    {
+      "model": "gradient_boosting(depth=3,iter=400)",
+      "val_average_precision": 0.7281,
+      "val_recall_at_budget": 0.7895
+    },
+    {
+      "model": "gradient_boosting(depth=3,iter=150)",
+      "val_average_precision": 0.7166,
+      "val_recall_at_budget": 0.7544
+    }
+  ],
+  "chosen_threshold_on_validation": 0.01525473497060645,
+  "test": {
+    "chosen_model": "gradient_boosting(depth=5,iter=400)",
+    "gradient_boosting": {
+      "average_precision": 0.8032536093976815,
+      "roc_auc": 0.9811306312665009,
+      "brier": 0.00042810014232598677,
+      "average_precision_ci95": [
+        0.7319259408911997,
+        0.8814691913814802
+      ],
+      "recall_at_budget": 0.8783783783783784,
+      "recall_at_budget_ci95": [
+        0.8063729647218453,
+        0.9375
+      ],
+      "precision_at_budget": 0.22887323943661972
+    },
+    "logistic_regression": {
+      "average_precision": 0.7427894024192258,
+      "roc_auc": 0.9815514978558457,
+      "brier": 0.025135332859002973,
+      "recall_at_budget": 0.8513513513513513
+    },
+    "uncalibrated_brier": 0.00044306976877979686,
+    "random_review_recall_at_budget": 0.005,
+    "base_rate": 0.0013040566735981391
+  },
+  "decision_rules_on_test": [
+    {
+      "rule": "no model (flag nothing)",
+      "flagged": 0,
+      "frauds_caught": 0,
+      "total_cost": 7727.67,
+      "saving_vs_no_model": 0.0,
+      "saving_pct": 0.0
+    },
+    {
+      "rule": "flag everything",
+      "flagged": 56746,
+      "frauds_caught": 74,
+      "total_cost": 283730.0,
+      "saving_vs_no_model": -276002.33,
+      "saving_pct": -3571.6
+    },
+    {
+      "rule": "top 0.5% by score (review budget)",
+      "flagged": 284,
+      "frauds_caught": 65,
+      "total_cost": 3135.59,
+      "saving_vs_no_model": 4592.08,
+      "saving_pct": 59.4
+    },
+    {
+      "rule": "cost-optimal threshold (tuned on validation)",
+      "flagged": 122,
+      "frauds_caught": 60,
+      "total_cost": 2989.42,
+      "saving_vs_no_model": 4738.25,
+      "saving_pct": 61.3
+    },
+    {
+      "rule": "expected-loss rule: p x amount > review cost",
+      "flagged": 83,
+      "frauds_caught": 24,
+      "total_cost": 2856.7,
+      "saving_vs_no_model": 4870.97,
+      "saving_pct": 63.0
+    }
+  ],
+  "top_features": {
+    "V14": 0.23087,
+    "V10": 0.21123,
+    "V4": 0.07324,
+    "V5": 0.02618,
+    "V17": 0.02235,
+    "V12": 0.02231,
+    "V22": 0.02076,
+    "V1": 0.02013,
+    "V3": 0.01919,
+    "V25": 0.01792
+  },
+  "drift_windows": [
+    {
+      "window": 1,
+      "hours_from_start": "40.3-42.3",
+      "transactions": 16028,
+      "frauds": 27,
+      "score_psi": 0.004420941124060205,
+      "max_feature_psi": 0.009604218737639007,
+      "worst_feature": "V4",
+      "average_precision": 0.9065266822268327
+    },
+    {
+      "window": 2,
+      "hours_from_start": "42.3-44.2",
+      "transactions": 15249,
+      "frauds": 26,
+      "score_psi": 0.009879947487382908,
+      "max_feature_psi": 0.04522620574512551,
+      "worst_feature": "log_amount",
+      "average_precision": 0.7861269308091451
+    },
+    {
+      "window": 3,
+      "hours_from_start": "44.2-46.1",
+      "transactions": 14932,
+      "frauds": 11,
+      "score_psi": 0.01204692460263119,
+      "max_feature_psi": 0.06655575288256528,
+      "worst_feature": "log_amount",
+      "average_precision": 0.8035384986612591
+    },
+    {
+      "window": 4,
+      "hours_from_start": "46.1-48.0",
+      "transactions": 10537,
+      "frauds": 10,
+      "score_psi": 0.019062299573794572,
+      "max_feature_psi": 0.09670623906900795,
+      "worst_feature": "V2",
+      "average_precision": 0.5668088665765808
+    }
+  ]
+}

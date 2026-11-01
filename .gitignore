@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.DS_Store
+# the dataset is not committed (it is ~150 MB; see data/README.md)
+data/*.csv
+data/*.zip
+artifacts/
